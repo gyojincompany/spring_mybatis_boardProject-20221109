@@ -1,6 +1,7 @@
 package com.gyojincompany.freeboard.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.gyojincompany.freeboard.dao.mapper.IDao;
+import com.gyojincompany.freeboard.dto.MemberDto;
 
 @Controller
 public class FBoardController {
@@ -66,12 +68,28 @@ public class FBoardController {
 		
 		IDao dao = sqlSession.getMapper(IDao.class);
 		
-		int checkIdFlag = dao.checkIdDao(mid);//1이면 아이디 존재
-		int checkPwFlag = dao.checkPwDao(mid, mpw);//1이면 아이디 비번 모두 일치
+		int checkIdFlag = dao.checkIdDao(mid);//1이면 아이디 존재 0이면 기존 가입한 아이디 없음
+		int checkPwFlag = dao.checkPwDao(mid, mpw);//1이면 아이디 비번 모두 일치 0이면 비밀번호 틀림
 		
 		model.addAttribute("checkIdFlag", checkIdFlag);
 		model.addAttribute("checkPwFlag", checkPwFlag);
 		model.addAttribute("mid", mid);
+		
+		if(checkPwFlag == 1) {//로그인 성공시 세션에 아이디와 로그인유효값을 설정
+			
+			HttpSession session = request.getSession();
+			
+			session.setAttribute("sessionId", mid);
+			session.setAttribute("ValidMem", "yes");
+			
+			MemberDto dto = dao.memberInfoDao(mid);
+			String mname= dto.getMname();
+			model.addAttribute("mname", mname);
+			
+		} else {
+			
+			model.addAttribute("mname", "손님");
+		}
 		
 		return "loginOk";
 	}
