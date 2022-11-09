@@ -9,7 +9,7 @@
 <body>
 	<h2>자유게시판 글쓰기</h2>
 	<hr>
-	<form action="list">
+	<form action="write">
 	아이디 : ${mid } <br><br>
 	이 름 : ${mname } <br><br>
 	제 목 : <input type="text" size="60" name="ftitle"><br><br>

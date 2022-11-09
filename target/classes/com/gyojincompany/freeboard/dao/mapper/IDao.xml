@@ -24,6 +24,9 @@
 	</select>
 	
 	<!-- 게시판 관리 SQL -->
-	
+	<insert id="writeDao">
+		INSERT INTO freeboard(fnum, fid, fname, ftitle, fcontent, fhit) 
+		VALUES(freeboard_seq.nextval, #{param1}, #{param2}, #{param3}, #{param4}, 0)
+	</insert>
 	
 </mapper>	

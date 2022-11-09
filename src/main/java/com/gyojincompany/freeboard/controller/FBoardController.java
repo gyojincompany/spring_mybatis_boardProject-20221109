@@ -102,12 +102,45 @@ public class FBoardController {
 		HttpSession session = request.getSession();
 		String sid = (String) session.getAttribute("sessionId");
 		
-		MemberDto dto = dao.memberInfoDao(sid);
-		String mname= dto.getMname();
-		String mid = dto.getMid();
-		model.addAttribute("mname", mname);
-		model.addAttribute("mid", mid);
-		
-		return "writeForm";
+		if(sid.equals(null)) {
+			return "redirect:login";
+		} else {		
+			MemberDto dto = dao.memberInfoDao(sid);
+			String mname= dto.getMname();
+			String mid = dto.getMid();
+			model.addAttribute("mname", mname);
+			model.addAttribute("mid", mid);
+			
+			return "writeForm";
+		}
 	}
+	
+	@RequestMapping(value = "write")
+	public String write(HttpServletRequest request) {
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		
+		HttpSession session = request.getSession();
+		String sid = (String) session.getAttribute("sessionId");
+		
+//		String mname="";
+//		String mid="";
+//		
+//		if(sid.equals(null)) {
+//			mname="손님";
+//			mid="guest";
+//		} else {
+		
+			MemberDto dto = dao.memberInfoDao(sid);
+			String mname= dto.getMname();
+			String mid = dto.getMid();		
+//		}
+		String ftitle = request.getParameter("ftitle");
+		String fcontent = request.getParameter("fcontent");
+		
+		dao.writeDao(mid, mname, ftitle, fcontent);
+		
+		return "redirect:list";
+	}
+	
 }
