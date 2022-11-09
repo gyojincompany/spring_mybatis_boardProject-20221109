@@ -93,4 +93,21 @@ public class FBoardController {
 		
 		return "loginOk";
 	}
+	
+	@RequestMapping(value = "writeForm")
+	public String writeForm(HttpServletRequest request, Model model) {
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		
+		HttpSession session = request.getSession();
+		String sid = (String) session.getAttribute("sessionId");
+		
+		MemberDto dto = dao.memberInfoDao(sid);
+		String mname= dto.getMname();
+		String mid = dto.getMid();
+		model.addAttribute("mname", mname);
+		model.addAttribute("mid", mid);
+		
+		return "writeForm";
+	}
 }

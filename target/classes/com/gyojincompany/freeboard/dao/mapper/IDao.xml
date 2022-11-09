@@ -5,6 +5,8 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="com.gyojincompany.freeboard.dao.mapper.IDao">
+	
+	<!-- 회원 관리 SQL -->
 	<insert id="joinMemberDao">
 		INSERT INTO member(mid, mpw, mname, memail) VALUES (#{param1}, #{param2},#{param3},#{param4})
 	</insert>
@@ -20,4 +22,8 @@
 	<select id="memberInfoDao" resultType="com.gyojincompany.freeboard.dto.MemberDto">
 		SELECT * FROM member WHERE mid=#{param1}
 	</select>
+	
+	<!-- 게시판 관리 SQL -->
+	
+	
 </mapper>	
