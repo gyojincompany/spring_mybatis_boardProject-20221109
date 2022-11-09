@@ -102,8 +102,6 @@ public class FBoardController {
 		HttpSession session = request.getSession();
 		String sid = (String) session.getAttribute("sessionId");
 		
-		System.out.println(sid);
-		
 		if(sid == null) {
 			return "redirect:login";
 		} else {		
