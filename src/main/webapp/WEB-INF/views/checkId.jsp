@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 가입 완료</title>
+<title>아이디 중복 여부 체크</title>
 </head>
 <body>
 	<%
@@ -16,11 +16,14 @@
 			history.go(-1);
 		</script>
 	<%
-	
+		} else {
+	%>
+		<script language="JavaScript">
+			alert("사용하셔도 좋은 아이디입니다. 계속해서 가입 진행해주세요.");
+			history.go(-1);
+		</script>
+	<%		
 		}
 	%>
-	
-	<h2>회원 가입을 축하드립니다.</h2>
-	<h2>${mname }님 반갑습니다.</h2>
 </body>
 </html>
