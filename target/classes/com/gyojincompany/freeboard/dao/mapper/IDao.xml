@@ -12,4 +12,8 @@
 	<select id="checkIdDao" resultType="int">
 		SELECT COUNT(*) FROM member WHERE mid=#{param1}
 	</select>
+	
+	<select id="checkPwDao" resultType="int">
+		SELECT COUNT(*) FROM member WHERE mid=#{param1} AND mpw=#{param2}
+	</select>
 </mapper>	

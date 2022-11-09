@@ -52,6 +52,27 @@ public class FBoardController {
 		return "checkId";
 	}
 	
+	@RequestMapping(value = "login")
+	public String login() {
+		
+		return "login";
+	}
 	
-	
+	@RequestMapping(value = "loginOk", method = RequestMethod.POST)
+	public String loginOk(HttpServletRequest request, Model model) {
+		
+		String mid = request.getParameter("mid");
+		String mpw = request.getParameter("mpw");
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		
+		int checkIdFlag = dao.checkIdDao(mid);//1이면 아이디 존재
+		int checkPwFlag = dao.checkPwDao(mid, mpw);//1이면 아이디 비번 모두 일치
+		
+		model.addAttribute("checkIdFlag", checkIdFlag);
+		model.addAttribute("checkPwFlag", checkPwFlag);
+		model.addAttribute("mid", mid);
+		
+		return "loginOk";
+	}
 }
