@@ -156,11 +156,26 @@ public class FBoardController {
 	}
 	
 	@RequestMapping(value = "list")
-	public String list(Model model) {
+	public String list(Model model, HttpServletRequest request) {
 		
 		IDao dao = sqlSession.getMapper(IDao.class);
 		ArrayList<FreeBoardDto> boardDtos =  dao.listDao();
 		
+		HttpSession session = request.getSession();//현재 세션 가져오기
+		  
+		String sid = (String) session.getAttribute("sessionId");
+		
+		int idflag = 0;
+		
+		if(sid != null) {//로그인이 되어있는 경우
+			idflag = 1;
+			model.addAttribute("sid", sid);
+			
+		}
+		model.addAttribute("idflag", idflag);//1이면 로그인중 0이면 비로그인중
+		
+		
+		model.addAttribute("boardSum", boardDtos.size());		
 		model.addAttribute("list", boardDtos);
 		
 		return "list";
@@ -173,6 +188,19 @@ public class FBoardController {
 		IDao dao = sqlSession.getMapper(IDao.class);		
 		
 		FreeBoardDto fbdto = dao.contentView(fnum);
+		
+		HttpSession session = request.getSession();//현재 세션 가져오기
+		
+		String sid = (String) session.getAttribute("sessionId");//현재 세션에 로그인 되어 있는 아이디 가져오기
+		
+		String fid = fbdto.getFid();//현재 보고 있는 글을 쓴 아이디
+		
+		int idflag = 0;
+		
+		if((sid != null) && (sid.equals(fid))) {
+			idflag = 1;
+		}
+		model.addAttribute("idflag", idflag);//idflag==1이면 수정,삭제 권한 설정
 		
 //		int fhit = fbdto.getFhit();
 //		fhit = fhit+1;		

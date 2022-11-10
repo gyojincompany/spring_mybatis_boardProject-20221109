@@ -8,8 +8,23 @@
 <title>자유게시판</title>
 </head>
 <body>
+	<%
+		int idflag	= Integer.parseInt(request.getAttribute("idflag").toString());
+		if(idflag == 1) {		
+	%>	
+	${sid }님 로그인 중 <input type="button" value="로그아웃" onclick="javascript:window.location='logout'">
+	<%
+		} else {
+	%>
+	<input type="button" value="로그인" onclick="javascript:window.location='login'">
+	<%
+		}
+	%>
+
 	<h2>글 목록</h2>
 	<hr>
+	총 게시글 개수 : ${boardSum}<br>
+	
 	<table width="1000" border="1" cellspacing="0" cellpadding="0">
 		<tr>
 			<th>번호</th>
