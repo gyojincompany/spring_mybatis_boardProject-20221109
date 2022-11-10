@@ -41,4 +41,8 @@
 		DELETE FROM freeboard WHERE fnum=#{param1}
 	</delete>
 	
+	<update id="modifyDao">
+		UPDATE freeboard SET fname=#{param2}, ftitle=#{param3}, fcontent=#{param4} WHERE fnum=#{param1}
+	</update>
+	
 </mapper>	

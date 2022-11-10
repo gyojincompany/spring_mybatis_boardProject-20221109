@@ -192,4 +192,33 @@ public class FBoardController {
 		return "redirect:list";
 	}
 	
+	@RequestMapping(value = "modifyView")
+	public String modifyView(HttpServletRequest request, Model model) {
+		
+		String fnum = request.getParameter("fnum");
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		
+		FreeBoardDto fbdto = dao.contentView(fnum);
+		
+		model.addAttribute("fbdto", fbdto);
+		
+		return "modifyView";
+	}
+	
+	@RequestMapping(value = "modify")
+	public String modify(HttpServletRequest request) {
+		
+		String fnum = request.getParameter("fnum");
+		String fname = request.getParameter("fname");
+		String ftitle = request.getParameter("ftitle");
+		String fcontent = request.getParameter("fcontent");
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		
+		dao.modifyDao(fnum, fname, ftitle, fcontent);
+		
+		return "redirect:list";
+	}
+	
 }
