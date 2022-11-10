@@ -1,5 +1,8 @@
 package com.gyojincompany.freeboard.dao.mapper;
 
+import java.util.ArrayList;
+
+import com.gyojincompany.freeboard.dto.FreeBoardDto;
 import com.gyojincompany.freeboard.dto.MemberDto;
 
 public interface IDao {
@@ -12,4 +15,5 @@ public interface IDao {
 	
 	//board 관련 메서드
 	public void writeDao(String mid, String mname, String ftitle, String fcontent);//게시판에 글쓰기
+	public ArrayList<FreeBoardDto> listDao();//게시판 리스트 불러오기
 }
