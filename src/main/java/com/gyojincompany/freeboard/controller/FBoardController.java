@@ -165,4 +165,31 @@ public class FBoardController {
 		
 		return "list";
 	}
+	
+	@RequestMapping(value = "contentView")
+	public String contentView(HttpServletRequest request, Model model) {
+		
+		String fnum = request.getParameter("fnum");
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		
+		FreeBoardDto fbdto = dao.contentView(fnum);
+		
+		model.addAttribute("fbdto", fbdto);
+		
+		return "contentView";
+	}
+	
+	@RequestMapping(value = "delete")
+	public String delete(HttpServletRequest request) {
+		
+		String fnum = request.getParameter("fnum");
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		
+		dao.deleteDao(fnum);
+		
+		return "redirect:list";
+	}
+	
 }

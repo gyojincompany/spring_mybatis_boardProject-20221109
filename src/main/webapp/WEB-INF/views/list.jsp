@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>자유게시판</title>
 </head>
 <body>
 	<h2>글 목록</h2>
@@ -24,7 +24,7 @@
 			<td>${fbdto.fnum }</td>
 			<td>${fbdto.fid }</td>
 			<td>${fbdto.fname }</td>
-			<td align="left">&nbsp;${fbdto.ftitle }</td>
+			<td align="left">&nbsp;<a href="contentView?fnum=${fbdto.fnum }">${fbdto.ftitle }</a></td>
 			<td>${fbdto.fhit }</td>
 			<td>${fbdto.fdate }</td>
 		</tr>
