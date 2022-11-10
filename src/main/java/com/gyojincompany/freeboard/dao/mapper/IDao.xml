@@ -45,4 +45,8 @@
 		UPDATE freeboard SET fname=#{param2}, ftitle=#{param3}, fcontent=#{param4} WHERE fnum=#{param1}
 	</update>
 	
+	<update id="upHit">
+		UPDATE freeboard SET fhit=fhit+1 WHERE fnum=#{param1}
+	</update>
+	
 </mapper>	

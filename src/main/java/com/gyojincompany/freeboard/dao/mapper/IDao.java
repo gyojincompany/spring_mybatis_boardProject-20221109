@@ -19,4 +19,5 @@ public interface IDao {
 	public FreeBoardDto contentView(String fnum);//글 내용 보기(클릭한 번호의 글 1개 불러오기)
 	public void deleteDao(String fnum);//글 삭제
 	public void modifyDao(String fnum, String fname, String ftitle, String fcontent);//글 수정
+	public void upHit(String fnum);//조회수 증가 함수//a++->a=a+1
 }

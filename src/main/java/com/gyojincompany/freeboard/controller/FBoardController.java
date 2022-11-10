@@ -168,12 +168,15 @@ public class FBoardController {
 	
 	@RequestMapping(value = "contentView")
 	public String contentView(HttpServletRequest request, Model model) {
-		
 		String fnum = request.getParameter("fnum");
 		
-		IDao dao = sqlSession.getMapper(IDao.class);
+		IDao dao = sqlSession.getMapper(IDao.class);		
 		
 		FreeBoardDto fbdto = dao.contentView(fnum);
+		
+//		int fhit = fbdto.getFhit();
+//		fhit = fhit+1;		
+		dao.upHit(fnum);//조회수 증가 함수
 		
 		model.addAttribute("fbdto", fbdto);
 		
